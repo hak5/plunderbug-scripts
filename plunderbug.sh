@@ -142,8 +142,8 @@ function enable_interface_in_networksetup(){
   BUGIFACE=$(ifconfig | grep 00:13:37 -B2 | head -1 | awk {'print $1'} | sed 's/ *:.*//')
   if [[ -n "$BUGIFACE" ]]; then
     BUGIFACENAME=$(networksetup -listnetworkserviceorder | grep $BUGIFACE -B1 | head -1 | sed 's/(.*)//' | cut -c2-)
-    networksetup -setv4on "$BUGIFACENAME" || err "error enabling ipv4 on bug interface"
-    networksetup -setv6on "$BUGIFACENAME" || err "error enabling ipv6 on bug interface"
+    networksetup -setdhcp "$BUGIFACENAME" || err "error enabling ipv4 on bug interface"
+    networksetup -setv6automatic "$BUGIFACENAME" || err "error enabling ipv6 on bug interface"
   fi
 }
 
