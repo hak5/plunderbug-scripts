@@ -66,7 +66,7 @@ function wait_for_bug_connection() {
     if [[ "$OS" -eq 1 ]]; then
       IFACE=$(ifconfig | grep 00:13:37 -B2 | head -1 | awk {'print $1'} | sed 's/ *:.*//')
     else
-      IFACE=$(find /sys/class/net -mindepth 1 -maxdepth 1 ! -name lo -printf "%P " -execdir cat {}/address \ | grep "00:13:37" | cut -d " " -f1)
+      IFACE=$(find /sys/class/net -mindepth 1 -maxdepth 1 ! -name lo -printf "%P " -execdir cat {}/address \; | grep "00:13:37" | cut -d " " -f1)
     fi
     sleep 1
   done
